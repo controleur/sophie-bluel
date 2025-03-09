@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -124,6 +125,28 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+.filters{
+	text-align: center;
+	margin: 50px auto;
+	font-size: 0; /** Remove default space from buttons**/
+}
+.filters button{
+	border: 1px solid #1D6154;
+	border-radius: 50px;
+	color: #1D6154;
+	background-color: #FFFEF8;
+	margin: 0 10px;
+	min-width: 100px;
+	height: 37px;
+	padding: 9px;
+	font-size: 16px;
+	font-family: 'Syne';
+	line-height: 100%;
+}
+.filters button:hover, .filters button.active{
+	background-color: #1D6154;
+	color: #FFFEF8;
 }
 .gallery {
 	width: 100%;
