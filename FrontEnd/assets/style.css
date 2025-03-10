@@ -59,6 +59,10 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+a{
+	text-decoration: none;
+	color: inherit;
+}
 section {
 	margin: 50px 0
 }
@@ -162,29 +166,29 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact h2, #login h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, #login form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+form input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+form label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -203,6 +207,13 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+#login {
+	width: 35%;
+	margin: 150px auto 355px auto;
+}
+#login h2{
+	text-align: center;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
