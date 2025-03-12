@@ -69,5 +69,21 @@ async function showFilteredWorks(categoryIdFilter) {
 showAllWorks()
 showFilters()
 
+//admin view
 
+if (window.localStorage.getItem("token")) {
+  //gestion du lien de déconnexion
+  const loginLink = document.getElementById("login-link");
+  loginLink.innerHTML = "<li>logout</li>"
+  loginLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.localStorage.removeItem("token");
+    alert("Vous avez bien été déconnecté")
+    location.reload();
+  })
+  
+  //effacement des filtres pour cette vue
+  const filters = document.querySelector(".filters")
+  filters.style.display="none"
+}
 

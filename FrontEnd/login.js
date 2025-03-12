@@ -1,3 +1,7 @@
+if (window.localStorage.getItem("token")) {
+    alert("Vous êtes déjà connecté");
+    location.replace("index.html")
+}
 async function login(email, password) {
     const url = "http://localhost:5678/api/users/login";
     try {
