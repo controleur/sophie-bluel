@@ -83,7 +83,9 @@ if (window.localStorage.getItem("token")) {
   })
   
   //effacement des filtres pour cette vue
-  const filters = document.querySelector(".filters")
-  filters.style.display="none"
+  const filters = document.querySelector(".filters");
+  filters.style.display="none";
+  const edit = document.getElementById("edit-button");
+  edit.style.display="inline"
 }
 

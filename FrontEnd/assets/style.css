@@ -130,6 +130,13 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+#portfolio-title{
+	display: flex;
+	justify-content: center;
+	margin: 139px 0 92px;
+	align-items: baseline;
+	gap: 31px;
+}
 .filters{
 	text-align: center;
 	margin: 50px auto;
@@ -210,13 +217,20 @@ input[type="submit"]{
 #login {
 	width: 35%;
 	margin: 150px auto 355px auto;
-}
-#login h2{
 	text-align: center;
+}
+#forgot-password{
+	text-decoration: underline;
 }
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+#edit-button{
+	display: none;
+}
+#edit-button img{
+	margin-right: 10px;
 }
 
