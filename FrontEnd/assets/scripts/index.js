@@ -97,18 +97,19 @@ if (window.localStorage.getItem("token")) {
   })
   const close = document.getElementById("modal-close");
   close.addEventListener("click", function () {
-    modalBackground.style.display = "none"
+    modalBackground.style.display = "none";
+    hideModalForm();
   })
+  const modalSubmit = document.getElementById("modal-submit")
+  modalSubmit.addEventListener("click", function (e) {
+    e.preventDefault();
+    showModalForm();
+  })
+
   const back = document.getElementById("modal-back");
-  back.addEventListener("click", function(){
-    modalBackground
+  back.addEventListener("click", function () {
+    hideModalForm();
   })
-  const AddWorkBtn = document.getElementById("modal-submit")
-      AddWorkBtn.addEventListener("click", function(e){
-        e.preventDefault();
-        modalGallery.style.display="none";
-        back.style.display="block";
-      })
   async function showWorksInModal() {
     modalGallery.innerHTML = "";
     const works = await getWorks();
@@ -118,9 +119,8 @@ if (window.localStorage.getItem("token")) {
           <img class="work-img" src="${works[i].imageUrl}" alt="${works[i].title}">
           <img class="delete-btn" id="delete-${works[i].id}" src="assets/icons/delete.png">
         </div>`)
-       const deleteBtn = document.getElementById(`delete-${works[i].id}`)
-       deleteBtn.addEventListener("click", function(){
-        console.log(`http://localhost:5678/api/works/${works[i].id}`);
+      const deleteBtn = document.getElementById(`delete-${works[i].id}`)
+      deleteBtn.addEventListener("click", function () {
         deleteWork(works[i].id);
         showWorksInModal();
       });
@@ -129,23 +129,41 @@ if (window.localStorage.getItem("token")) {
   async function deleteWork(id) {
     const url = `http://localhost:5678/api/works/${id}`;
     try {
-        const token = window.localStorage.getItem("token");
-        const response = await fetch(url, {
-            method: "DELETE",
-            headers: { "accept": "accept: */*",
-                        "Authorization": `Bearer ${token}`},
-        });
-        if (response.status === 401) {
-            alert("Veuillez vous connecter");
-            location.reload();
-        }
-        else {
-          alert(`Vous avez bien supprimé la photo n°${id}`)
-        }
+      const token = window.localStorage.getItem("token");
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "accept": "accept: */*",
+          "Authorization": `Bearer ${token}`
+        },
+      });
+      if (response.status === 401) {
+        alert("Veuillez vous connecter");
+        location.reload();
+      }
+      else {
+        alert(`Vous avez bien supprimé la photo n°${id}`)
+      }
     } catch (error) {
-        console.error(error.message);
-        alert("Erreur de notre côté, veuillez réitérer ultérieurement");
+      console.error(error.message);
+      alert("Erreur de notre côté, veuillez réitérer ultérieurement");
     }
+  }
+  function showModalForm(){
+    modalGallery.style.display = "none";
+    back.style.display = "block";
+    document.getElementById("modal-title").innerHTML = "Ajout photo";
+    document.getElementById("modal-form").style.display = "flex";
+    modalSubmit.value="Valider";
+    modalSubmit.style.background = "#A7A7A7";
+  }
+  function hideModalForm(){
+    modalGallery.style.display = "grid";
+    back.style.display = "none";
+    document.getElementById("modal-title").innerHTML = "Gallerie photo";
+    document.getElementById("modal-form").style.display = "none";
+    modalSubmit.value="Ajouter une photo";
+    modalSubmit.style.removeProperty("background");
   }
 }
 

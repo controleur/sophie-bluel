@@ -75,6 +75,19 @@
 		<form action="#">
 			<div id="modal-content">
 				<div id="modal-gallery"></div>
+				<div id="modal-form">
+					<div id="image-upload">
+						<img src="/assets/icons/img-placeholder.png" alt="Mettre en ligne une image">
+						<label for="image-input" id="image-label">+ Ajouter photo</label>
+						<input type="file" name="Image du projet" id="image-input" accept=".jpg, .png">
+						<p>jpg, png : 4mo max</p>
+					</div>
+					<label for="name">Titre</label>
+					<input type="text" name="Nom du projet" id="name">
+					<label for="categories">Catégorie</label>
+					<input list="categories">
+						<datalist id="categories"></datalist>
+				</div>
 			</div>
 			<input type="submit" id="modal-submit" value="Ajouter une photo">
 		</form>
