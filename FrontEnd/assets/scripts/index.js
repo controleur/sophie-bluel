@@ -81,11 +81,71 @@ if (window.localStorage.getItem("token")) {
     alert("Vous avez bien été déconnecté")
     location.reload();
   })
-  
+  const modalBackground = document.getElementById("modal-background");
+  const modalGallery = document.getElementById("modal-gallery")
   //effacement des filtres pour cette vue
   const filters = document.querySelector(".filters");
-  filters.style.display="none";
+  filters.style.display = "none";
+  //affichage du bouton d'édition
   const edit = document.getElementById("edit-button");
-  edit.style.display="inline"
+  edit.style.display = "inline"
+  edit.addEventListener("click", function (e) {
+    e.preventDefault();
+    const modalBackground = document.getElementById("modal-background");
+    modalBackground.style.display = "block";
+    showWorksInModal()
+  })
+  const close = document.getElementById("modal-close");
+  close.addEventListener("click", function () {
+    modalBackground.style.display = "none"
+  })
+  const back = document.getElementById("modal-back");
+  back.addEventListener("click", function(){
+    modalBackground
+  })
+  const AddWorkBtn = document.getElementById("modal-submit")
+      AddWorkBtn.addEventListener("click", function(e){
+        e.preventDefault();
+        modalGallery.style.display="none";
+        back.style.display="block";
+      })
+  async function showWorksInModal() {
+    modalGallery.innerHTML = "";
+    const works = await getWorks();
+    for (const i in works) {
+      modalGallery.insertAdjacentHTML("beforeend", `
+        <div class="modal-work">
+          <img class="work-img" src="${works[i].imageUrl}" alt="${works[i].title}">
+          <img class="delete-btn" id="delete-${works[i].id}" src="assets/icons/delete.png">
+        </div>`)
+       const deleteBtn = document.getElementById(`delete-${works[i].id}`)
+       deleteBtn.addEventListener("click", function(){
+        console.log(`http://localhost:5678/api/works/${works[i].id}`);
+        deleteWork(works[i].id);
+        showWorksInModal();
+      });
+    }
+  }
+  async function deleteWork(id) {
+    const url = `http://localhost:5678/api/works/${id}`;
+    try {
+        const token = window.localStorage.getItem("token");
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: { "accept": "accept: */*",
+                        "Authorization": `Bearer ${token}`},
+        });
+        if (response.status === 401) {
+            alert("Veuillez vous connecter");
+            location.reload();
+        }
+        else {
+          alert(`Vous avez bien supprimé la photo n°${id}`)
+        }
+    } catch (error) {
+        console.error(error.message);
+        alert("Erreur de notre côté, veuillez réitérer ultérieurement");
+    }
+  }
 }
 

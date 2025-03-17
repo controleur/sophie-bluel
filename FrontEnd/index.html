@@ -44,7 +44,7 @@
 	<section id="portfolio">
 		<div id="portfolio-title">
 			<h2>Mes Projets</h2>
-			<span id="edit-button"><img src="assets/icons/edit.png" alt="Icône modifier">modifier</span></div>
+			<a href="#" id="edit-button"><img src="assets/icons/edit.png" alt="Icône modifier">modifier</a></div>
 		<div class="filters">
 			<button id="allcategories" class="active">Tous</button>
 		</div>
@@ -65,7 +65,22 @@
 		</form>
 	</section>
 </main>
+<aside id="modal-background">
+	<div id="modal">
+		<div id="modal-controls">
+			<img id="modal-close" src="assets/icons/xmark.png" alt="Fermer la fenêtre d'édition">
+			<img id="modal-back" src="assets/icons/arrow-left.png" alt="Revenir en arrière">
+		</div>
+		<h3 id="modal-title">Galerie photo</h3>
+		<form action="#">
+			<div id="modal-content">
+				<div id="modal-gallery"></div>
+			</div>
+			<input type="submit" id="modal-submit" value="Ajouter une photo">
+		</form>
 
+	</div>
+</aside>
 <footer>
 	<nav>
 		<ul>
