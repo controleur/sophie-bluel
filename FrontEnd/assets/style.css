@@ -189,7 +189,7 @@ li:hover {
 	flex-direction: column;
 }
 
-form input {
+form input, select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;

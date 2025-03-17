@@ -45,19 +45,19 @@ async function showFilters() {
     const previousActive = document.querySelector(".active")
     previousActive.classList.remove("active")
     this.classList.add("active")
-    const gallery = document.querySelector(".gallery")
-    gallery.innerHTML = ""
     showAllWorks()
   })
 }
 async function showAllWorks() {
   const works = await getWorks()
   const gallery = document.querySelector(".gallery")
+  gallery.innerHTML = ""
   for (const i in works) {
     gallery.insertAdjacentHTML("beforeend", `<figure><img src="${works[i].imageUrl}" alt="${works[i].title}"><figcaption>${works[i].title}</figcaption></figure>`)
   }
 }
 async function showFilteredWorks(categoryIdFilter) {
+  gallery.innerHTML = ""
   const works = await getWorks()
   const filteredWorks = works.filter(function worksByCategory(el) { return el.categoryId == categoryIdFilter })
   const gallery = document.querySelector(".gallery")
@@ -100,10 +100,12 @@ if (window.localStorage.getItem("token")) {
     modalBackground.style.display = "none";
     hideModalForm();
   })
+  
   const modalSubmit = document.getElementById("modal-submit")
   modalSubmit.addEventListener("click", function (e) {
     e.preventDefault();
     showModalForm();
+    categoriesForModal();
   })
 
   const back = document.getElementById("modal-back");
@@ -123,6 +125,7 @@ if (window.localStorage.getItem("token")) {
       deleteBtn.addEventListener("click", function () {
         deleteWork(works[i].id);
         showWorksInModal();
+        showAllWorks();
       });
     }
   }
@@ -166,4 +169,11 @@ if (window.localStorage.getItem("token")) {
     modalSubmit.style.removeProperty("background");
   }
 }
-
+async function categoriesForModal(){
+  const datalist = document.getElementById("categorieSelect");
+  datalist.innerHTML = "";
+  const categories = await getCategories();
+  for (const i in categories) {
+    datalist.insertAdjacentHTML("beforeend",`<option value="${categories[i].id}">${categories[i].name}</option>`)
+  }
+}
