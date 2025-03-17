@@ -57,7 +57,6 @@ async function showAllWorks() {
   }
 }
 async function showFilteredWorks(categoryIdFilter) {
-  gallery.innerHTML = ""
   const works = await getWorks()
   const filteredWorks = works.filter(function worksByCategory(el) { return el.categoryId == categoryIdFilter })
   const gallery = document.querySelector(".gallery")
