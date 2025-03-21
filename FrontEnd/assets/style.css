@@ -317,3 +317,4 @@ footer nav ul {
 	margin: 1em;
 }
 #modal-send{display: none;}
+#modal-send:disabled {background-color: #A7A7A7;}

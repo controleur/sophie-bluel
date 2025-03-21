@@ -177,12 +177,20 @@ const sendButton = document.getElementById("modal-send");
 sendButton.addEventListener("click", (e) => {
     e.preventDefault();
     const formData = new FormData(form);
-    if (!formData.get("title") || !formData.get("image") || !formData.get("category")) {
-      alert("Veuillez remplir tous les champs obligatoires.");
-      return;
-    }
     sendWork(formData);
 })
+
+const titleInput = document.getElementById("title");
+const imageInput = document.getElementById("imageInput");
+sendButton.disabled = true;
+function checkFormFilled() {
+  const isTitleFilled = titleInput.value.trim() !== "";
+  const isImageSelected = imageInput.files.length > 0;
+  sendButton.disabled = !(isTitleFilled && isImageSelected);
+}
+titleInput.addEventListener("input", checkFormFilled);
+imageInput.addEventListener("change", checkFormFilled);
+
 
 async function sendWork(formData) {
   const url = "http://localhost:5678/api/works";
