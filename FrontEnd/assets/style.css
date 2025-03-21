@@ -182,14 +182,14 @@ li:hover {
 #contact h2, #login h2{
 	margin-bottom: 20px;
 }
-#contact form, #login form, #modal-form{
+#contact form, #login form, #modal-inputs{
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-form input, select {
+form input, select, #modal-next {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -203,7 +203,7 @@ form label {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"], #modal-button{
+input[type="submit"], #modal-button, #modal-next{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 14px;
@@ -301,10 +301,10 @@ footer nav ul {
     align-items: center;
 	font-size: 10px;
 }
-#modal-form{
+#modal-inputs{
 	display: none;
 }
-#image-input{
+#imageInput{
  	display: none;
 }
 #image-label{
@@ -316,3 +316,4 @@ footer nav ul {
 	padding: 10px 33px;
 	margin: 1em;
 }
+#modal-send{display: none;}

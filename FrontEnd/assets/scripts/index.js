@@ -69,7 +69,6 @@ showAllWorks()
 showFilters()
 
 //admin view
-
 if (window.localStorage.getItem("token")) {
   //gestion du lien de déconnexion
   const loginLink = document.getElementById("login-link");
@@ -81,13 +80,13 @@ if (window.localStorage.getItem("token")) {
     location.reload();
   })
   const modalBackground = document.getElementById("modal-background");
-  const modalGallery = document.getElementById("modal-gallery")
+  const modalGallery = document.getElementById("modal-gallery");
   //effacement des filtres pour cette vue
   const filters = document.querySelector(".filters");
   filters.style.display = "none";
   //affichage du bouton d'édition
   const edit = document.getElementById("edit-button");
-  edit.style.display = "inline"
+  edit.style.display = "inline";
   edit.addEventListener("click", function (e) {
     e.preventDefault();
     const modalBackground = document.getElementById("modal-background");
@@ -99,21 +98,21 @@ if (window.localStorage.getItem("token")) {
     modalBackground.style.display = "none";
     hideModalForm();
   })
-  
-  const modalSubmit = document.getElementById("modal-submit")
-  modalSubmit.addEventListener("click", function (e) {
+  const modalNext = document.getElementById("modal-next")
+  modalNext.addEventListener("click", function (e) {
     e.preventDefault();
     showModalForm();
     categoriesForModal();
   })
+  const modalSend = document.getElementById("modal-send")
 
   const back = document.getElementById("modal-back");
   back.addEventListener("click", function () {
     hideModalForm();
   })
   async function showWorksInModal() {
-    modalGallery.innerHTML = "";
     const works = await getWorks();
+    modalGallery.innerHTML = "";
     for (const i in works) {
       modalGallery.insertAdjacentHTML("beforeend", `
         <div class="modal-work">
@@ -134,10 +133,7 @@ if (window.localStorage.getItem("token")) {
       const token = window.localStorage.getItem("token");
       const response = await fetch(url, {
         method: "DELETE",
-        headers: {
-          "accept": "accept: */*",
-          "Authorization": `Bearer ${token}`
-        },
+        headers: {"Authorization": `Bearer ${token}`},
       });
       if (response.status === 401) {
         alert("Veuillez vous connecter");
@@ -155,24 +151,63 @@ if (window.localStorage.getItem("token")) {
     modalGallery.style.display = "none";
     back.style.display = "block";
     document.getElementById("modal-title").innerHTML = "Ajout photo";
-    document.getElementById("modal-form").style.display = "flex";
-    modalSubmit.value="Valider";
-    modalSubmit.style.background = "#A7A7A7";
+    document.getElementById("modal-inputs").style.display = "flex";
+    modalNext.style.display ="none";
+    modalSend.style.display = "block";
   }
   function hideModalForm(){
     modalGallery.style.display = "grid";
     back.style.display = "none";
     document.getElementById("modal-title").innerHTML = "Gallerie photo";
-    document.getElementById("modal-form").style.display = "none";
-    modalSubmit.value="Ajouter une photo";
-    modalSubmit.style.removeProperty("background");
+    document.getElementById("modal-inputs").style.display ="none";
+    modalNext.style.display ="block";
+    modalSend.style.display ="none";
   }
 }
 async function categoriesForModal(){
-  const datalist = document.getElementById("categorieSelect");
+  const datalist = document.getElementById("categorySelect");
   datalist.innerHTML = "";
   const categories = await getCategories();
   for (const i in categories) {
     datalist.insertAdjacentHTML("beforeend",`<option value="${categories[i].id}">${categories[i].name}</option>`)
+  }
+}
+const form = document.getElementById("modal-form");
+const sendButton = document.getElementById("modal-send");
+sendButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    if (!formData.get("title") || !formData.get("image") || !formData.get("category")) {
+      alert("Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+    sendWork(formData);
+})
+
+async function sendWork(formData) {
+  const url = "http://localhost:5678/api/works";
+  try {
+      const token = window.localStorage.getItem("token");
+      const response = await fetch(url, {
+          method: "POST",
+          headers: {"Authorization": `Bearer ${token}`},
+          body: formData,
+      });
+      if (response.status === 201) {
+          alert("Travail ajouté avec succès");
+      }
+      if (response.status === 400) {
+        alert("Erreur dans la saisie");
+        location.reload();
+      }
+      else if (response.status === 401) {
+          alert("Veuillez vous reconnecter");
+          location.reload();
+      }
+      else {
+      }
+  } catch (error) {
+      console.error(error.message);
+      alert("Erreur de notre côté, veuillez réitérer ultérieurement");
   }
 }

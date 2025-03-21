@@ -72,23 +72,24 @@
 			<img id="modal-back" src="assets/icons/arrow-left.png" alt="Revenir en arrière">
 		</div>
 		<h3 id="modal-title">Galerie photo</h3>
-		<form action="#">
+		<form id="modal-form" action="#">
 			<div id="modal-content">
 				<div id="modal-gallery"></div>
-				<div id="modal-form">
+				<div id="modal-inputs">
 					<div id="image-upload">
 						<img src="/assets/icons/img-placeholder.png" alt="Mettre en ligne une image">
-						<label for="image-input" id="image-label">+ Ajouter photo</label>
-						<input type="file" name="Image du projet" id="image-input" accept=".jpg, .png">
+						<label for="imageInput" id="image-label">+ Ajouter photo</label>
+						<input type="file" name="image" id="imageInput" accept=".jpg, .png">
 						<p>jpg, png : 4mo max</p>
 					</div>
 					<label for="name">Titre</label>
-					<input type="text" name="Nom du projet" id="name">
+					<input type="text" name="title" id="name">
 					<label for="categorieSelect">Catégorie</label>
-					<select name="categories" id="categorieSelect"></select>
+					<select name="category" id="categorySelect"></select>
 				</div>
 			</div>
-			<input type="submit" id="modal-submit" value="Ajouter une photo">
+			<button id="modal-next">Ajouter une photo</button>
+			<input type="submit" id="modal-send" value="Valider">
 		</form>
 
 	</div>
