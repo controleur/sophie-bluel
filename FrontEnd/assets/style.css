@@ -295,11 +295,19 @@ footer nav ul {
 #image-upload{
 	background: #E8F1F6;
 	border-radius: 3px;
-	padding: 15px;
 	display: flex;
 	flex-direction: column;
     align-items: center;
 	font-size: 10px;
+}
+#upload-content{
+	display: flex;
+	padding: 15px;
+    align-items: center;
+    flex-direction: column;}
+#uploaded{
+	display: none;
+	width: 33%;
 }
 #modal-inputs{
 	display: none;

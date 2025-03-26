@@ -77,10 +77,13 @@
 				<div id="modal-gallery"></div>
 				<div id="modal-inputs">
 					<div id="image-upload">
-						<img src="/assets/icons/img-placeholder.png" alt="Mettre en ligne une image">
-						<label for="imageInput" id="image-label">+ Ajouter photo</label>
-						<input type="file" name="image" id="imageInput" accept=".jpg, .png">
-						<p>jpg, png : 4mo max</p>
+						<div id="upload-content">
+							<img src="/assets/icons/img-placeholder.png" alt="Mettre en ligne une image">
+							<label for="imageInput" id="image-label">+ Ajouter photo</label>
+							<input type="file" name="image" id="imageInput" accept=".jpg, .png">
+							<p>jpg, png : 4mo max</p>
+						</div>
+						<img src="" alt="Image ajoutée" id="uploaded">
 					</div>
 					<label for="name">Titre</label>
 					<input type="text" name="title" id="title">
