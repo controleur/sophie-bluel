@@ -235,7 +235,17 @@ function checkFormFilled() {
   //déclenchement de l'aperçu de l'image
   if (isImageSelected) {
     const file = document.querySelector("input[type=file]").files[0];
-    reader.readAsDataURL(file);
+    //n'afficher l'aperçu et ne prendre en compte l'image que si elle fait moins de 4 Mo et est bien un jpg ou png
+    const allowedFileTypes = ["image/png", "image/jpeg"];
+    if (Math.round((file.size / 1024)) >= 4096) {
+      alert("Fichier trop volumineux, veuillez sélectionner un fichier de moins de 4 Mo");
+      imageInput.value = "";
+    }
+    else if(!allowedFileTypes.includes(file.type)){
+      alert("Merci de ne mettre en ligne que des fichier en .jpg ou .png");
+      imageInput.value = "";
+    }
+    else{reader.readAsDataURL(file);} 
   }
 }
 //vérification du remplissage des champs lorsqu'une image est choisie ou qu'un titre est tapé
