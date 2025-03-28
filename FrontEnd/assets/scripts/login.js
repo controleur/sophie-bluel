@@ -6,8 +6,7 @@ if (window.localStorage.getItem("token")) {
 //déclaration des constantes
 const form = document.getElementById("login-form");
 const loginButton = document.getElementById("login-submit");
-const email = form.email.value;
-const password = form.password.value;
+
 //envoi des données saisie dans le backend stockage du token dans le localStorage si réponse positive
 async function login(email, password) {
   const url = "http://localhost:5678/api/users/login";
@@ -37,5 +36,16 @@ async function login(email, password) {
 //appel de la fonction de connexion lors du clic sur le bouton de soumission
 loginButton.addEventListener("click", (e) => {
   e.preventDefault();
-  login(email, password);
+  if(form.email.value==""){
+    alert("Veillez renseigner votre e-mail de connexion");
+  }
+  else if (form.password.value==""){
+    alert("Veillez renseigner votre mot de passe");
+  }
+  else{
+    const email = form.email.value;
+    const password = form.password.value;
+    login(email, password);
+  }
+  
 });
