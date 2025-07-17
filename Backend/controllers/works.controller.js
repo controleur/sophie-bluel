@@ -1,5 +1,6 @@
 const db = require('./../models');
 const Works = db.works
+const { put } = require('@vercel/blob');
 
 exports.findAll = async (req, res) =>  {
 	const works = await Works.findAll({include: 'category'});
@@ -7,12 +8,17 @@ exports.findAll = async (req, res) =>  {
 }
 
 exports.create = async (req, res) => {
-	const host = req.get('host');
 	const title = req.body.title;
 	const categoryId = req.body.category;
 	const userId = req.auth.userId;
-	const imageUrl = `${req.protocol}://${host}/images/${req.file.filename}`;
+
 	try{
+		const blob = await put(req.file.originalname, req.file.buffer, {
+			access: 'public',
+			addRandomSuffix: true
+		});
+		const imageUrl = blob.url;
+
 		const work = await Works.create({
 			title,
 			imageUrl,
@@ -21,6 +27,7 @@ exports.create = async (req, res) => {
 		})
 		return res.status(201).json(work)
 	}catch (err) {
+		console.error(err);
 		return res.status(500).json({ error: new Error('Something went wrong') })
 	}
 }
