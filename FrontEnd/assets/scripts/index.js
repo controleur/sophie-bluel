@@ -22,7 +22,7 @@ const uploaded = document.getElementById("uploaded");
 const reader = new FileReader();
 //récupération des travaux depuis le backend
 async function getWorks() {
-  const url = "http://localhost:5678/api/works";
+  const url = "/api/works";
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -37,7 +37,7 @@ async function getWorks() {
 }
 //récupération des catégories depuis le backend
 async function getCategories() {
-  const url = "http://localhost:5678/api/categories";
+  const url = "/api/categories";
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -164,7 +164,7 @@ async function showWorksInModal() {
 }
 //appel API permettant la suppression des travaux dans le backend
 async function deleteWork(id) {
-  const url = `http://localhost:5678/api/works/${id}`;
+  const url = `/api/works/${id}`;
   try {
     const response = await fetch(url, {
       method: "DELETE",
@@ -261,7 +261,7 @@ function clearForm() {
 }
 //envoi du nouvel ajout dans le backend
 async function sendWork(formData) {
-  const url = "http://localhost:5678/api/works";
+  const url = "/api/works";
   try {
     const response = await fetch(url, {
       method: "POST",
