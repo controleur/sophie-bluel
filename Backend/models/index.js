@@ -2,7 +2,11 @@ const dbConfig = require("./../config/db.config.js");
 const {Sequelize}  = require("sequelize");
 const config = require("../config/db.config");
 
-const sequelize = new Sequelize('project6-db', 'user', 'pass', config)
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  dialectOptions: {},
+});
 
 const db = {}
 
