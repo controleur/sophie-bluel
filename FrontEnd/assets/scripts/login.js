@@ -9,7 +9,7 @@ const loginButton = document.getElementById("login-submit");
 
 //envoi des données saisie dans le backend stockage du token dans le localStorage si réponse positive
 async function login(email, password) {
-  const url = "http://localhost:5678/api/users/login";
+  const url = "/api/users/login";
   try {
     const response = await fetch(url, {
       method: "POST",
